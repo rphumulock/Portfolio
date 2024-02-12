@@ -36,7 +36,13 @@ tasks:
       - pnpm i
       # - pnpm vitest --watch=false
       - pnpm vite build
-      - cp -Rfpvd dist/* ../{{.NAME}}/static
+      - if [ "$(uname)" == "Darwin" ]; then
+        # Commands for macOS
+       cp -Rfpv dist/* ../{{.NAME}}/static
+      else
+        # Commands for other operating systems
+       cp -Rfpvd dist/* ../{{.NAME}}/static
+      fi
       - cp package.json ../{{.NAME}}/static
 
   tailwind:

@@ -5,9 +5,7 @@ import (
 	"fmt"
 
 	"github.com/delaneyj/datastar"
-	"github.com/delaneyj/gomponents-iconify/iconify/material_symbols"
 	"github.com/delaneyj/gomponents-iconify/iconify/simple_icons"
-	"github.com/delaneyj/gomponents-iconify/iconify/tabler"
 	"github.com/delaneyj/toolbelt"
 	. "github.com/delaneyj/toolbelt/gomps"
 	"github.com/go-chi/chi/v5"
@@ -16,8 +14,7 @@ import (
 func Page(children ...NODE) NODE {
 	linkPages := []string{
 		"Examples",
-		"Docs",
-		"Essays",
+		"Projects",
 	}
 	type ExternalPage struct {
 		Icon NodeFunc
@@ -25,23 +22,15 @@ func Page(children ...NODE) NODE {
 	}
 	externalPages := []ExternalPage{
 		{
-			Icon: simple_icons.Discord,
-			Link: "https://discord.com/channels/725789699527933952/1180902694999838752",
-		},
-		{
 			Icon: simple_icons.Github,
-			Link: "https://github.com/delaneyj/datastar/tree/main/library",
-		},
-		{
-			Icon: simple_icons.Npm,
-			Link: "https://www.npmjs.com/package/@sudodevnull/datastar",
+			Link: "https://github.com/rphumulock",
 		},
 	}
 
 	return HTML5(HTML5Props{
-		Title:       "Datastar ",
+		Title:       "Peter Humulock",
 		Language:    "en",
-		Description: `Datastar is a declarative frontend framework that takes the best of modern tooling and combines them with a heavy dose of declarative hypermedia into a single framework that is blazingly easy to use.`,
+		Description: `Fun`,
 		Head: NODES{
 			LINK(
 				REL("icon"),
@@ -73,31 +62,13 @@ func Page(children ...NODE) NODE {
 				grid-cols-[1fr]
 			`),
 			DIV(
-				CLS("py-2 flex flex-col items-center bg-cover bg-opacity-50 text-white bg-center"),
-				STYLE(fmt.Sprintf("background-image: url(%s);", staticPath("bg.jpg"))),
+				CLS("py-2 flex flex-col items-center bg-cover bg-opacity-50 text-primary-content bg-neutral bg-center"),
 				DIV(
-					CLS("w-full flex flex-wrap justify-center md:justify-between items-center gap-6 px-4  backdrop-blur-sm py-1 bg-base-200 bg-opacity-50"),
+					CLS("w-full flex flex-wrap justify-center md:justify-between items-center gap-6 px-4 backdrop-blur-sm py-1 bg-neutral bg-opacity-50"),
 					A(
 						CLS("flex gap-2 items-center text-5xl font-display"),
-						TXT("Datastar"),
-						material_symbols.AwardStarOutline(),
+						TXT("Peter Humulock"),
 						HREF("/"),
-					),
-					DIV(
-						CLS("flex flex-col gap-1 md:items-end"),
-						DIV(TXT("Declarative Frontend Framework")),
-						DIV(
-							CLS("flex gap-1 items-center"),
-							DIV(
-								CLS("font-mono text-accent font-bold text-xs"),
-								TXT("v"+packageJSON.Version),
-							),
-							DIV(
-								CLS("badge badge-accent flex-1 gap-1 text-xs p-1 w-full md:w-auto "),
-								tabler.FileZip(),
-								TXTF("< %s w/ all plugins", UpsertIIfeBuildSize()),
-							),
-						),
 					),
 				),
 			),
@@ -107,7 +78,7 @@ func Page(children ...NODE) NODE {
 					CLS("flex gap-2"),
 					RANGE(linkPages, func(p string) NODE {
 						return A(
-							CLS("btn btn-ghost btn-sm"),
+							CLS("btn btn-ghost btn-sm text-primary-content"),
 							TXT(p),
 							HREF(fmt.Sprintf("/%s", toolbelt.Lower(toolbelt.Snake(p)))),
 						)
@@ -117,7 +88,7 @@ func Page(children ...NODE) NODE {
 					CLS("flex gap-2"),
 					RANGE(externalPages, func(p ExternalPage) NODE {
 						return A(
-							CLS("btn btn-ghost btn-sm flex justify-center items-center rounded-full"),
+							CLS("btn btn-ghost btn-sm flex justify-center items-center text-neutral rounded-full"),
 							p.Icon(CLS("text-2xl")),
 							HREF(p.Link),
 						)

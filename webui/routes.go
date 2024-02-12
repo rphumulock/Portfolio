@@ -26,8 +26,6 @@ func setupRoutes(ctx context.Context, router *chi.Mux) error {
 		setupAPI(ctx, router),
 		setupHome(ctx, router),
 		setupExamples(ctx, router),
-		setupEssays(ctx, router),
-		setupDocs(ctx, router),
 	); err != nil {
 		return fmt.Errorf("error setting up routes: %w", err)
 	}
